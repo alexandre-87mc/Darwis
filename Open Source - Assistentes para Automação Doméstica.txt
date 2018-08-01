@@ -1,0 +1,36 @@
+Open Source para automação doméstica
+
+Calaos
+Calaos is designed as a full-stack home automation platform, including a server application, touchscreen interface, web application, native mobile applications for iOS and Android, and a preconfigured Linux operating system to run underneath. The Calaos project emerged from a French company, so its support forums are primarily in French, although most of the instructional material and documentation have been translated into English.
+
+Calaos is licensed under version 3 of the GPL and you can view its source on GitHub.
+
+
+Domoticz
+Domoticz is a home automation system with a pretty wide library of supported devices, ranging from weather stations to smoke detectors to remote controls, and a large number of additional third-party integrations are documented on the project's website. It is designed with an HTML5 frontend, making it accessible from desktop browsers and most modern smartphones, and is lightweight, running on many low-power devices like the Raspberry Pi.
+
+Domoticz is written primarily in C/C++ under the GPLv3, and its source code can be browsed on GitHub.
+
+
+Home Assistant
+Home Assistant is an open source home automation platform designed to be easily deployed on almost any machine that can run Python 3, from a Raspberry Pi to a network-attached storage (NAS) device, and it even ships with a Docker container to make deploying on other systems a breeze. It integrates with a large number of open source as well as commercial offerings, allowing you to link, for example, IFTTT, weather information, or your Amazon Echo device, to control hardware from locks to lights.
+
+Home Assistant is released under an MIT license, and its source can be downloaded from GitHub.
+
+
+MisterHouse
+MisterHouse has gained a lot of ground since 2016, when we mentioned it as "another option to consider" on this list. It uses Perl scripts to monitor anything that can be queried by a computer or control anything capable of being remote controlled. It responds to voice commands, time of day, weather, location, and other events to turn on the lights, wake you up, record your favorite TV show, announce phone callers, warn that your front door is open, report how long your son has been online, tell you if your daughter's car is speeding, and much more. It runs on Linux, macOS, and Windows computers and can read/write from a wide variety of devices including security systems, weather stations, caller ID, routers, vehicle location systems, and more
+
+MisterHouse is licensed under the GPLv2 and you can view its source code on GitHub.
+
+
+OpenHAB
+OpenHAB (short for Open Home Automation Bus) is one of the best-known home automation tools among open source enthusiasts, with a large user community and quite a number of supported devices and integrations. Written in Java, openHAB is portable across most major operating systems and even runs nicely on the Raspberry Pi. Supporting hundreds of devices, openHAB is designed to be device-agnostic while making it easier for developers to add their own devices or plugins to the system. OpenHAB also ships iOS and Android apps for device control, as well as design tools so you can create your own UI for your home system.
+
+You can find openHAB's source code on GitHub licensed under the Eclipse Public License.
+
+
+OpenMotics
+OpenMotics is a home automation system with both hardware and software under open source licenses. It's designed to provide a comprehensive system for controlling devices, rather than stitching together many devices from different providers. Unlike many of the other systems designed primarily for easy retrofitting, OpenMotics focuses on a hardwired solution. For more, see our full article from OpenMotics backend developer Frederick Ryckbosch.
+
+The source code for OpenMotics is licensed under the GPLv2 and is available for download on GitHub.
