@@ -1,2 +1,2 @@
-# Darwis - Projeto pessoal brincando com arduíno e automação doméstica
+# Darwis - Personal project. Just playing with home IOT.
 
