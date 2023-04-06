@@ -4,22 +4,22 @@
 #define pinLED1 2  //GP2 ESP-01
 
 //WiFi
-const char* SSID = "NET_2G517AFC";                // SSID / nome da rede WiFi que deseja se conectar
-const char* PASSWORD = "F9517AFC";   // Senha da rede WiFi que deseja se conectar
+const char* SSID = "NET_2G517AFC";                // SSID / WiFi network name you want to connect
+const char* PASSWORD = "F9517AFC";   // Password of the WiFi network you want to connect to
 WiFiClient wifiClient;                        
  
 //MQTT Server
-const char* BROKER_MQTT = "iot.eclipse.org"; //URL do broker MQTT que se deseja utilizar
+const char* BROKER_MQTT = "iot.eclipse.org"; //URL of the MQTT broker you want to use
 int BROKER_PORT = 1883;                      // Porta do Broker MQTT
 
-#define ID_MQTT  "BCI02"             //Informe um ID unico e seu. Caso sejam usados IDs repetidos a ultima conexão irá sobrepor a anterior. 
-#define TOPIC_SUBSCRIBE "BCIBotao1"   //Informe um Tópico único. Caso sejam usados tópicos em duplicidade, o último irá eliminar o anterior.
-PubSubClient MQTT(wifiClient);        // Instancia o Cliente MQTT passando o objeto espClient
+#define ID_MQTT "BCI02"             //Enter a unique ID and yours. If repeated IDs are used, the last connection will override the previous one.
+#define TOPIC_SUBSCRIBE "BCIBotao1" //Inform a single Topic. If duplicate topics are used, the last one will eliminate the previous one.
+PubSubClient MQTT(wifiClient);      // Instantiate the MQTT Client by passing the espClient object
 
 //Declaração das Funções
-void mantemConexoes();  //Garante que as conexoes com WiFi e MQTT Broker se mantenham ativas
-void conectaWiFi();     //Faz conexão com WiFi
-void conectaMQTT();     //Faz conexão com Broker MQTT
+void mantemConexoes();  //Ensures connections to WiFi and MQTT Broker remain active
+void conectaWiFi();     //Makes WiFi connection
+void conectaMQTT();     //Makes Broker MQTT connection
 void recebePacote(char* topic, byte* payload, unsigned int length);
 
 void setup() {
@@ -42,7 +42,7 @@ void mantemConexoes() {
        conectaMQTT(); 
     }
     
-    conectaWiFi(); //se não há conexão com o WiFI, a conexão é refeita
+    conectaWiFi(); //if there is no connection to WiFI, the connection is redone
 }
 
 void conectaWiFi() {
