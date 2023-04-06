@@ -4,23 +4,23 @@
 #define pinBotao1 5  //D1
 
 //WiFi
-const char* SSID = "NET_2GA0DC53";                // SSID / nome da rede WiFi que deseja se conectar
-const char* PASSWORD = "23A0DC53";   // Senha da rede WiFi que deseja se conectar
+const char* SSID = "NET_2GA0DC53";                // SSID / wifi network to connect
+const char* PASSWORD = "23A0DC53";               // wifi password
 WiFiClient wifiClient;                        
  
 //MQTT Server
-const char* BROKER_MQTT = "m12.cloudmqtt.com"; //URL do broker MQTT que se deseja utilizar ENDEREÇO DO SERVIDOR
-int BROKER_PORT = 12525;                      // Porta do Broker MQTT  PORTA DO SERVIDOR
+const char* BROKER_MQTT = "m12.cloudmqtt.com"; //URL broker MQTT to use server adress
+int BROKER_PORT = 12525;                      // door Broker MQTT server door
 
-#define ID_MQTT  "L1B"            //Informe um ID unico e seu. Caso sejam usados IDs repetidos a ultima conexão irá sobrepor a anterior. 
-#define TOPIC_PUBLISH "casa/L1"    //Informe um Tópico único. Caso sejam usados tópicos em duplicidade, o último irá eliminar o anterior.
-PubSubClient MQTT(wifiClient);        // Instancia o Cliente MQTT passando o objeto espClient
+#define ID_MQTT  "L1B"            //Enter a unique ID and yours. If repeated IDs are used, the last connection will override the previous one. 
+#define TOPIC_PUBLISH "casa/L1"    //Enter a single Topic. If duplicate topics are used, the last one will eliminate the previous one.
+PubSubClient MQTT(wifiClient);        // Instantiate the MQTT Client by passing the espClient object
 
 //Declaração das Funções
-void mantemConexoes();  //Garante que as conexoes com WiFi e MQTT Broker se mantenham ativas
-void conectaWiFi();     //Faz conexão com WiFi
-void conectaMQTT();     //Faz conexão com Broker MQTT
-void enviaPacote();     //ENVIA O PACOTE -- PAYLOAD
+void mantemConexoes();  //Ensures connections to WiFi and MQTT Broker remain active
+void conectaWiFi();     //Do wifi connection
+void conectaMQTT();     //Do connection Broker MQTT
+void enviaPacote();     //send package -- PAYLOAD
 
 void setup() {
   pinMode(pinBotao1, INPUT_PULLUP);         
@@ -32,9 +32,9 @@ void setup() {
 }
 
 void loop() {
-  mantemConexoes(); //avalia se perdeu a conexão e tenta retomar
-  enviaValores(); //evita inundação de msgs e dados desnecessários enviados
-  MQTT.loop();  //necessário para comunicação constante com broker
+  mantemConexoes(); //evaluates whether the connection has been lost and tries to resume
+  enviaValores(); //avoids flooding of messages and unnecessary data sent
+  MQTT.loop();  //necessary for constant communication with broker
 }
 
 void mantemConexoes() {
@@ -42,7 +42,7 @@ void mantemConexoes() {
        conectaMQTT(); 
     }
     
-    conectaWiFi(); //se não há conexão com o WiFI, a conexão é refeita
+    conectaWiFi(); //if no connection, try again
 }
 
 void conectaWiFi() {
@@ -55,7 +55,7 @@ void conectaWiFi() {
   Serial.print(SSID);
   Serial.println("  Aguarde!");
 
-  WiFi.begin(SSID, PASSWORD); // Conecta na rede WI-FI  
+  WiFi.begin(SSID, PASSWORD); // Connect WI-FI  
   while (WiFi.status() != WL_CONNECTED) {
       delay(100);
       Serial.print(".");
@@ -89,7 +89,7 @@ static bool estadoBotao1Ant = HIGH;
 static unsigned long debounceBotao1;
 
   estadoBotao1 = digitalRead(pinBotao1);
-  if (  (millis() - debounceBotao1) > 30 ) {  //Elimina efeito Bouncing
+  if (  (millis() - debounceBotao1) > 30 ) {  //Eliminate Bouncing Effect
      if (!estadoBotao1 && estadoBotao1Ant) {
 
         //Botao Apertado     
