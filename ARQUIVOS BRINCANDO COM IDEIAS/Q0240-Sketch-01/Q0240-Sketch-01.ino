@@ -3,46 +3,46 @@
 const char* ssid = "NET_2GA0DC53";
 const char* password = "23A0DC53";
 
-WiFiServer server(80); //Shield irá receber as requisições das páginas (o padrão WEB é a porta 80)
+WiFiServer server(80); //Shield will receive requisitions from pages (o padrão WEB é a porta 80)
 
 String HTTP_req; 
-String URLValue;  // Variáveis utilizadas pela sketch
+String URLValue;  // Variables used by Sketch
 
-void processaPorta(byte porta, byte posicao, WiFiClient cl);  // declaração de funções
+void processaPorta(byte porta, byte posicao, WiFiClient cl);  // functions
 void lePortaDigital(byte porta, byte posicao, WiFiClient cl);        
 String getURLRequest(String *requisicao);
 bool mainPageRequest(String *requisicao);
 
-const byte qtdePinosDigitais = 1; // quantidade de pinos a ser controlada
-byte pinosDigitais[qtdePinosDigitais] = {0}; // porta GPIO
-byte modoPinos[qtdePinosDigitais]     = {OUTPUT}; //Estado da porta
+const byte qtdePinosDigitais = 1; // number of pin to control
+byte pinosDigitais[qtdePinosDigitais] = {0}; // door GPIO
+byte modoPinos[qtdePinosDigitais]     = {OUTPUT}; //door state
 
 void setup()
 {         
-    Serial.begin(115200); // mostra no monitor serial IP, etc
+    Serial.begin(115200); // shows serial IP on monitor, etc
 
-    //Conexão na rede WiFi
+    //WiFi connection
     Serial.println();
     Serial.print("Conectando a ");
     Serial.println(ssid);
 
-    WiFi.begin(ssid, password); // inicia a conexão
+    WiFi.begin(ssid, password); // initiate connection
 
     while (WiFi.status() != WL_CONNECTED) {
       delay(500);
       Serial.print(".");
     }
     Serial.println("");
-    Serial.println("WiFi conectado!");  // quando ocorre a conexão exibe a msg
+    Serial.println("WiFi conectado!");  // shows message when connect
 
-    // Inicia o servidor WEB
+    // start web server
     server.begin();
     Serial.println("Server iniciado");
 
-    // Mostra o endereco IP
+    // show IP adress
     Serial.println(WiFi.localIP());
 
-    //Configura o modo dos pinos
+    //configure pin mode
     for (int nP=0; nP < qtdePinosDigitais; nP++) {
         pinMode(pinosDigitais[nP], modoPinos[nP]);
     }
@@ -51,7 +51,7 @@ void setup()
 void loop()
 {
 
-  WiFiClient  client = server.available();  // Objeto server com função/metodo "available" que permite ver se há requisição
+  WiFiClient  client = server.available();  //server object with function/method "available" allows to see requisition
 
     if (client) { 
         boolean currentLineIsBlank = true;
@@ -68,7 +68,7 @@ void loop()
                                                  
                         client.println("HTTP/1.1 200 OK");
                         client.println("Content-Type: text/html");
-                        client.println("Connection: keep-alive");              //<------ ATENCAO
+                        client.println("Connection: keep-alive");              //<------ attention
                         client.println();
                         
                         //Conteudo da Página HTML
@@ -91,7 +91,7 @@ void loop()
                         client.println("if (this.status == 200) {");
                         client.println("if (this.responseText != null) {");
 
-                        for (int nL=0; nL < qtdePinosDigitais; nL++) {                                                    //<-------NOVO
+                        for (int nL=0; nL < qtdePinosDigitais; nL++) {                                                    //<-------new
                             client.print("posIni = this.responseText.indexOf(\"PD");
                             client.print(pinosDigitais[nL]);
                             client.println("\");");
@@ -114,7 +114,7 @@ void loop()
                         
                         client.println("</head>");
 
-                        client.println("<body onload=\"LeDadosDoArduino()\">");                      //<------ALTERADO                    
+                        client.println("<body onload=\"LeDadosDoArduino()\">");                      //<------altered                    
                         client.println("<h1>PORTAS EM FUN&Ccedil;&Atilde;O ANAL&Oacute;GICA</h1>");
 
                                                
@@ -136,7 +136,7 @@ void loop()
                         client.println("</html>");
 
                     
-                    } else if (HTTP_req.indexOf("solicitacao_via_ajax") > -1) {     //<----- NOVO
+                    } else if (HTTP_req.indexOf("solicitacao_via_ajax") > -1) {     //<----- new
 
                         Serial.println(HTTP_req);
 
@@ -203,7 +203,7 @@ String cHTML;
     
     cl.print("\"");
 
-    cl.print(" id=\"pino");           //<------NOVO
+    cl.print(" id=\"pino");           //<------new
     cl.print(porta);
     cl.print("\"");
     
